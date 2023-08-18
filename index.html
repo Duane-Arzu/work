@@ -1,10 +1,15 @@
+<!-- CMPS3141-HCI - AS1-23S1
+Collaborators:
+Date:
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Edit this with title of exercise</title>
+	<title>CMPS3141 Grade Calculator</title>
 	<script src="https://mavue.mavo.io/mavue.js" type="module"></script>
 	<script src="index.js" type="module"></script>
 </head>
@@ -15,18 +20,56 @@
 		Project:
 		<input type="number" min="0" max="100" v-model="assessments.project" /> / 100
 	</div>
-	<!--Add the other assessments-->
-	
-
-	<div> <!--Add v-for loop for homeworks and iterate data-->
-		{{ homeworks.length }} homeworks: 
+	<div>
+		Program Set:
+		<input type="number" min="0" max="100" v-model="assessments.prgmSet" /> / 100
 	</div>
-	<button @click="addHomework()">Add homework</button>
+	<div>
+		Test:
+		<input type="number" min="0" max="100" v-model="assessments.test" /> / 100
+	</div>
+	<div>
+		Final Exam:
+		<input type="number" min="0" max="100" v-model="assessments.fExam" /> / 100
+	</div>
+	<div>
+    Participation:
+    <input type="number" min="0" max="100" v-model="assessments.prgmSet" /> / 100
+</div>
+<div>
+    Feedback:
+    <input type="number" min="0" max="100" v-model="assessments.Test" /> / 100
+</div>
+<div>
+    Other Participation:
+    <input type="number" min="0" max="100" v-model="assessments.FExam" /> / 100
+</div>
 
-	<!--Add Test Assessments-->
-	
-	
-	<div>Projected class grade: {{ calculatedGrade }}</div>
+<div> <!--Add v-for loop for homeworks and iterate data-->
+    {{ homeworks.length }} homeworks:
+    <ul>
+        <li v-for="(hw, index) in homeworks" :key="index">
+            Homework {{ index + 1 }}:
+            <input type="number" min="0" v-model="homeworks[index]" /> / 100
+        </li>
+    </ul>
+</div>
+
+<button @click="addHomework()">Add homework</button>
+<!--Add Test Assessments-->
+<div>
+    Tests:
+    <ul>
+        <li v-for="(test, index) in Tests" :key="index">
+            Test {{ index + 1 }}:
+            <input type="number" min="0" v-model="Tests[index]" /> / 100
+        </li>
+    </ul>
+</div>
+
+	<div>
+		Projected class grade: {{ calculatedGrade }}
+	</div>
 </div>
 
 </body>

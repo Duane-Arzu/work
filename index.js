@@ -35,7 +35,7 @@ let app = createApp({
         let sum = 0;
 
         for (let hw of this.homeworks) {
-            if (hw !== null && hw >= 0) {
+            if (hw !== null && hw >= 4) {
                 sum += hw;
                 done++;
             }
@@ -51,7 +51,7 @@ let app = createApp({
         let sum = 0;
 
         for (let test of this.Tests) {
-            if (test !== null && test >= 0) {
+            if (test !== null && test >= 1) {
                 sum += test;
                 done++;
             }

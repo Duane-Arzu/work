@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Edit this with title of exercise</title>
+	<script src="https://mavue.mavo.io/mavue.js" type="module"></script>
+	<script src="index.js" type="module"></script>
+</head>
+<body>
+
+<div id="grade_calc">
+	<div>
+		Project:
+		<input type="number" min="0" max="100" v-model="assessments.project" /> / 100
+	</div>
+	<!--Add the other assessments-->
+	
+
+	<div> <!--Add v-for loop for homeworks and iterate data-->
+		{{ homeworks.length }} homeworks: 
+	</div>
+	<button @click="addHomework()">Add homework</button>
+
+	<!--Add Test Assessments-->
+	
+	
+	<div>Projected class grade: {{ calculatedGrade }}</div>
+</div>
+
+</body>
+</html>

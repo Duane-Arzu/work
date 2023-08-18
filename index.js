@@ -67,7 +67,7 @@ let app = createApp({
      * Does not prevent more homeworks than 5 from being added.
      */
     addHomework() {
-      this.homeworks.push(5);
+      this.homeworks.push(null);
     },
   },
 }, "#grade_calc");

@@ -1,104 +1,127 @@
-<!-- CMPS3141-HCI - AS1-23S1
-Collaborators:
-Date:
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>CMPS3141 Grade Calculator</title>
+	<title>Grade Calculator</title>
 	<script src="https://mavue.mavo.io/mavue.js" type="module"></script>
 	<script src="index.js" type="module"></script>
-	 <style>
-        #grade_calc {
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: center;
-            max-width: 300px;
-        }
-        input {
-            width: 100%;
-            padding: 4px;
-            border: 1px solid #ccc;
-            border-radius: 1px;
-            margin-bottom: 10px;
-            transition: border-color 0.3s;
-        }
-        input:focus {
-            border-color: #007bff;
-        }
-        button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 2px;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f4f4f4;
+		}
+
+		#grade_calc {
+			width: 80%;
+			margin: 20px auto;
+			background-color: #ffffff;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+		th, td {
+			padding: 10px;
+			text-align: left;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		input[type="number"] {
+			width: 60px;
+			padding: 5px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+
+		button {
+			padding: 8px 12px;
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		button.reset-button {
+			background-color: #dc3545;
+		}
+
+		button:hover {
+			background-color: #0056b3;
+		}
+
+		#homeworksGrade, #testsGrades {
+			font-size: 14px;
+			color: #555;
+		}
+
+		#PCG {
+			font-weight: bold;
+			font-size: 18px;
+		}
+	</style>
 </head>
 <body>
 
 <div id="grade_calc">
-	<div>
-		Project:
-		<input type="number" min="0" max="100" v-model="assessments.project" /> / 100
-	</div>
-	<div>
-		Program Set:
-		<input type="number" min="0" max="100" v-model="assessments.prgmSet" /> / 100
-	</div>
-	<div>
-		Test:
-		<input type="number" min="0" max="100" v-model="assessments.test" /> / 100
-	</div>
-	<div>
-		Final Exam:
-		<input type="number" min="0" max="100" v-model="assessments.fExam" /> / 100
-	</div>
-	<div>
-    Participation:
-    <input type="number" min="0" max="100" v-model="assessments.FExam" /> / 100
-</div>
-<div>
-    Feedback:
-    <input type="number" min="0" max="100" v-model="assessments.Test" /> / 100
-</div>
+	<table>
+		<tr>
+			<th>Semester Project:</th>
+			<td><input type="number" min="0" max="100" v-model="assessments.project" /> / 100 </td>
+		<tr>
 
-<div> <!--Add v-for loop for homeworks and iterate data-->
-    {{ homeworks.length }} homeworks:
-    <ul>
-        <li v-for="(hw, index) in homeworks" :key="index">
-            Homework {{ index + 1 }}:
-            <input type="number" min="0" v-model="homeworks[index]" /> / 100
-        </li>
-    </ul>
-</div>
-
-<button @click="addHomework()">Add homework</button>
-<!--Add Test Assessments-->
-<div>
-    Tests:
-    <ul>
-        <li v-for="(test, index) in Tests" :key="index">
-            Test {{ index + 1 }}:
-            <input type="number" min="0" v-model="Tests[index]" /> / 100
-        </li>
-    </ul>
-</div>
-
-	<div>
-		Projected class grade: {{ calculatedGrade }}
-	</div>
+		<tr>
+			<th>Program Set:</th>
+			<td><input type="number" min="0" max="100" v-model="assessments.prgmSet" /> / 100 </td>
+		<tr>
+	
+		<tr>
+			<th>Homework:</th>
+			<td><input id="HW.value" type="number" min="0" max="100" v-model="assessments.homework" /> / 100  <br>
+				<div>
+					{{ homeworks.length - 1 }} homeworks: <p id="homeworksGrade"></p>
+				</div><br>
+				<button @click="addHomework()">Add homework</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th>Tests:</th>
+			<td><input id="test.value" type="number" min="0" max="100" v-model="assessments.Test" /> / 100  <br>
+				<div>
+					{{ Tests.length - 1 }} Tests: <p id="testsGrades"></p>
+				</div> <br>
+				<button @click="addTest()">Add Test</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th>Final Exam:</th>
+			<td><input type="number" min="0" max="100" v-model="assessments.FExam" /> / 100</td>
+		</tr>
+	
+		<tr id="PCG">
+			<th id="PCG">
+				Projected class grade:
+			</th>
+			<td><b><i> 
+				{{ calculatedGrade }}
+			</td></i></b>
+		</tr>
+	</table>
+	<button class="reset-button" @click="resetForm()">Reset</button>
 </div>
 
 </body>
